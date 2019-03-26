@@ -1,12 +1,12 @@
 //服务器 emit-> 客户端
 作用                事件名              数据
-接收注册状态        regist_state    { registstate } //registstate:注册状态
-接收登录状态        login_state     { loginstate }  //loginstate:登录状态
-获取广告详情        ad_trans        { { game_summary, game_id, game_name, game_auth, publish_date, cost, type_Moba, type_CardAndChess, group_cost, game_pict } }
+1.接收注册状态        regist_state    { registstate } //registstate:注册状态
+2.接收登录状态        login_state     { loginstate }  //loginstate:登录状态
+3.获取广告详情        ad_trans        { { game_summary, game_id, game_name, game_auth, publish_date, cost, type_Moba, type_CardAndChess, group_cost, game_pict } }
 //game_summary:游戏简介, game_id:游戏号码, game_auth: 游戏作者, publish_date:出版日期, cost:原价, type_CardAndChess:是否为棋牌类游戏， type_Moba:是否为Moba类游戏, group_cost:拼团后价格, game_pict:游戏图片
-获取广告概览        ad_get          { requirestate, adcount, ads{ adid, gameid, adpict } }//requirestate:是否获取成功, adcount:广告数量, ads:广告{ adid: 广告号码, gameid:对应游戏号码, adpict:广告图片 }
-获取即时状态        state           { state }   //state, 状态信息
-获取拼团概览        group_get       { group_count, groups{ group_id, game_id, user_count, owner{ user_name, sex, birth, user_pict } } }
+4.获取广告概览        ad_get          { requirestate, adcount, ads{ adid, gameid, adpict } }//requirestate:是否获取成功, adcount:广告数量, ads:广告{ adid: 广告号码, gameid:对应游戏号码, adpict:广告图片 }
+5.获取即时状态        state           { state }   //state, 状态信息
+6.获取拼团概览        group_get       { group_count, groups{ group_id, game_id, user_count, owner{ user_name, sex, birth, user_pict } } }
 //group_count:拼团信息数量, groups:拼团信息{
     group_id: 拼团号码,
     game_id: 游戏号码,
@@ -18,17 +18,29 @@
         user_pict: 用户头像
         }
     }
+7.发送用户查询结果    rearch_response     {game_part}
+//game_part{
+        string game_count;  //一共查询到的游戏个数;
+        gamepart_info[] game_p;  //游戏的部分信息 }
+//game_p{
+    public string game_id;  //游戏ID
+    public string game_name;//游戏名称
+    public string game_pict;//游戏图片
+    public string type_Moba;//游戏类型
+    public string type_CardAndChess;//游戏类型}
+
 
 
 //客户端 emit-> 服务器
-作用    事件名                  数据
-请求注册一个账号    regist              { user_id, password, user_name, （sex）, （birth）, e_mail, phone } //user_id e_mail phone至少发送一个
-请求一次账号登录    login               { account, password }
-批量请求游戏概览    games_require       { times }       //times:批量请求游戏时的批次
-请求单个广告详情    trans_ad            { ad_num }      //ad_num:广告的号码
-请求一些广告概览    require_ad          {}
-请求对应拼团概览    groups_require      { game_id }     //game_id:请求游戏的号码
-请求创建对应拼团    create_group        { game_id }     //game_id:请求创建拼团的游戏号码
-请求加入单个拼团    join_group          { group_id }    //group_id:请求加入的拼团号码
-请求退出单个拼团    quit_group          { group_id }
-请求删除单个拼团    delete_group        { group_id }
+作用                      事件名                  数据
+1.请求注册一个账号          regist              { user_id, password, user_name, （sex）, （birth）, e_mail, phone } //user_id e_mail phone至少发送一个
+2.请求一次账号登录          login               { account, password }
+3.批量请求游戏概览          games_require       { times }       //times:批量请求游戏时的批次
+4.请求单个广告详情          trans_ad            { ad_num }      //ad_num:广告的号码
+5.请求一些广告概览          require_ad          {}
+6.请求对应拼团概览          groups_require      { game_id }     //game_id:请求游戏的号码
+7.请求创建对应拼团          create_group        { game_id }     //game_id:请求创建拼团的游戏号码
+8.请求加入单个拼团          join_group          { group_id }    //group_id:请求加入的拼团号码
+9.请求退出单个拼团          quit_group          { group_id }
+10.请求删除单个拼团         delete_group        { group_id }
+11.在主页上请求查询一个游戏  main_search         { search } //search:用户输入在查询框输入的内容
