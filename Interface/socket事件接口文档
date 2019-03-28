@@ -68,6 +68,7 @@
 {
     public string game_id;
     public string game_name;
+    public string game_pic;
     public string game_auth;
     public string buy_time;  //购买的时间，如果还在购买中，返回null
     public Boolean isbought;//是否购买，true为已经购买，false为还未成功购买
