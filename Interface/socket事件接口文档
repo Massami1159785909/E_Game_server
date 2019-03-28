@@ -28,11 +28,12 @@
     public string game_pict;//游戏图片
     public string type_Moba;//游戏类型
     public string type_CardAndChess;//游戏类型}
-8.发送登录用户的信息    user_info       { public string user_id;public string user_name;public string user_password; public string user_birth; public Boolean user_sex;public string user_contents; public string game_counts; public games_info[] games;}
+8.发送登录用户的信息    user_info       { public string user_id;public string user_name;public string user_pic;public string user_pic;public string user_password; public string user_birth; public Boolean user_sex;public string user_contents; public string game_counts; public games_info[] games;}
 //public class user_information : MonoBehaviour
 {
     public string user_id;
     public string user_name;
+    public string user_pic;
     public string user_password;
     public string user_birth;
     public Boolean user_sex;    //true代表女，false代表男
@@ -53,6 +54,7 @@
         {
         this.user_id = x.user_id;
         this.user_name = x.user_name;
+        this.user_pic=x.user_pic;
         this.user_password = x.user_password;
         this.user_sex = x.user_sex;
         this.user_birth = x.user_birth;
